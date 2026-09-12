@@ -1,163 +1,180 @@
-# 🚀 AI Agent IDE
+# 🤖 AI Agent IDE
 
-Professional AI-powered IDE for building mobile apps, web apps, and automation scripts.
+**Professional AI-Powered Development Environment**  
+Build mobile apps, websites, and automation workflows with intelligent AI agents.
 
-**Developed by:** Davie Kuminga | Davie Cyber Team
+![Version](https://img.shields.io/badge/version-2.2.0-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Next.js](https://img.shields.io/badge/Next.js-14-black)
+
+---
 
 ## ✨ Features
 
-- 🤖 **AI Code Generation** - Generate code using advanced AI models
-- 📱 **Mobile App Builder** - Create Android/iOS apps with React Native
-- 🌐 **Web App Builder** - Build modern web applications
-- ⚡ **Automation Scripts** - Automate tasks with AI-generated scripts
-- 🌍 **Multi-Language Support** - English, Chichewa, Spanish, French, Portuguese
-- 🎨 **Theme Support** - Light and dark themes
-- 📁 **Project Management** - Create, edit, and organize projects
-- 📋 **Templates Library** - Quick-start templates for common projects
-- ⚙️ **Settings** - Customize AI model, API keys, and preferences
+### 🎯 Core Capabilities
+- **AI-Powered Code Generation** - Generate code using advanced AI agents
+- **Multi-Language Support** - English, Chichewa, and more
+- **Real-Time Preview** - Instant preview of your applications
+- **Version Control** - Built-in Git integration
+- **One-Click Deployment** - Deploy to Vercel, Netlify, or build Android APKs
 
-## 🔧 Installation
+### 🚀 Advanced Features
+- **Plugin System** - Extend functionality with custom plugins
+- **File Explorer** - Complete project file management
+- **AI Assistant** - Chat with AI for coding help
+- **Code Editor** - Syntax highlighting and intelligent autocomplete
+- **Mobile-Optimized** - Responsive design for Android devices
+- **Theme Support** - Light/Dark mode with customizable themes
+- **Offline Mode** - Work without internet connection
 
-### Prerequisites
-- Node.js 18+ 
-- npm or yarn
-- Android Studio (for Android builds)
-- Xcode (for iOS builds, Mac only)
+### 🤖 AI Agents
+- **Code Agent** - Generate any code (Python, JavaScript, Java, etc.)
+- **Mobile Agent** - Build Android and iOS apps
+- **Web Agent** - Create websites and web apps
+- **Automation Agent** - Build workflow automations
 
-### Setup
+---
+
+## 📦 Installation
+
+### For Development
 
 ```bash
-# Clone the repository
+# Clone repository
 git clone https://github.com/daviekumi-glitch/ai-agent-ide.git
 cd ai-agent-ide
 
 # Install dependencies
 npm install
+# or
+yarn install
 
-# Start development server
+# Run development server
 npm run dev
+# or
+yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to see the app.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## 📱 Build for Android
+### For Android APK
 
 ```bash
-# Install Capacitor CLI globally
-npm install -g @capacitor/cli
+# Install Capacitor
+npm install @capacitor/core @capacitor/cli
 
-# Build the web app
+# Add Android platform
+npx cap add android
+
+# Build for production
 npm run build
-
-# Sync with Android
-npx cap sync android
+npx cap sync
 
 # Open in Android Studio
 npx cap open android
 ```
 
-## 🌍 Supported Languages
+---
 
-- 🇬🇧 English
-- 🇲🇼 Chichewa (Chinyanja)
-- 🇪🇸 Spanish
-- 🇫🇷 French
-- 🇵🇹 Portuguese
+## 🎨 Usage
 
-## 🎨 Theme System
+### 1. **Select Agent Type**
+Choose from Code, Mobile, Web, or Automation agents
 
-The app supports:
-- 🌙 Dark Mode (default)
-- ☀️ Light Mode
+### 2. **Describe What You Want**
+Type your requirements in natural language
 
-Theme preference is saved locally and persists across sessions.
+### 3. **Generate Code**
+AI generates production-ready code instantly
 
-## 📖 Usage
+### 4. **Preview & Test**
+See live preview of your application
 
-### Creating a New Project
+### 5. **Deploy**
+One-click deployment to your preferred platform
 
-1. Navigate to **Projects** page
-2. Click **Create New Project**
-3. Enter project name, type, and description
-4. Click **Save**
+---
 
-### Using Templates
+## 🔌 Plugin Development
 
-1. Go to **Templates** page
-2. Browse available templates
-3. Click **Use Template** on your chosen template
-4. Template code will be loaded in the IDE
+Create custom plugins to extend IDE functionality:
 
-### Generating Code with AI
+```typescript
+import { Plugin } from '@/lib/plugin-system'
 
-1. Select an AI agent (Code, Mobile, Web, or Automation)
-2. Enter your prompt describing what you want to build
-3. Click **Generate**
-4. AI will generate the code for you
-5. Click **Run** to execute the code
-
-### Settings Configuration
-
-1. Go to **Settings**
-2. Configure:
-   - Theme (Light/Dark)
-   - Language
-   - AI API Key
-   - AI Model selection
-   - Auto-save preferences
-
-## 🔑 API Configuration
-
-To use AI features, you need an API key:
-
-1. Get an API key from OpenAI, Anthropic, or Google AI
-2. Go to Settings
-3. Enter your API key
-4. Select your preferred model
-5. Save settings
-
-## 📂 Project Structure
-
+const myPlugin: Plugin = {
+  id: 'my-plugin',
+  name: 'My Custom Plugin',
+  version: '1.0.0',
+  description: 'Does amazing things',
+  author: 'Your Name',
+  enabled: true,
+  hooks: {
+    onCodeGenerate: async (code) => {
+      // Modify generated code
+      return code
+    }
+  }
+}
 ```
-ai-agent-ide/
-├── app/                    # Next.js app directory
-│   ├── page.tsx           # Main IDE interface
-│   ├── projects/          # Projects management
-│   ├── templates/         # Templates library
-│   ├── settings/          # Settings page
-│   └── api/               # API routes
-├── components/            # React components
-│   ├── Navigation.tsx     # Navigation bar
-│   ├── Header.tsx         # App header
-│   ├── CodeEditor.tsx     # Code editor
-│   ├── OutputPanel.tsx    # Output display
-│   └── ActionBar.tsx      # Action buttons
-├── lib/                   # Utilities
-│   ├── i18n.ts           # Translations
-│   └── theme-context.tsx  # Theme provider
-└── public/               # Static assets
-```
+
+---
+
+## 🌐 Supported Platforms
+
+- ✅ **Web** - Any modern browser
+- ✅ **Android** - Android 7.0+
+- ✅ **iOS** - iOS 13+ (coming soon)
+- ✅ **Desktop** - Electron app (coming soon)
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 14
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Mobile**: Capacitor
+- **AI**: Multiple AI agent systems
+- **Version Control**: Git integration
+- **Deployment**: Vercel/Netlify ready
+
+---
+
+## 📚 Documentation
+
+- [User Guide](./docs/user-guide.md)
+- [API Reference](./docs/api.md)
+- [Plugin Development](./docs/plugins.md)
+- [Contributing](./CONTRIBUTING.md)
+
+---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please read our [Contributing Guidelines](./CONTRIBUTING.md) first.
 
-## 📄 License
+---
 
-MIT License - see LICENSE file for details
+## 📝 License
 
-## 👨‍💻 Developer
+MIT License - see [LICENSE](./LICENSE) file for details
+
+---
+
+## 👨‍💻 Author
 
 **Davie Kuminga**  
 Davie Cyber Team
 
-GitHub: [@daviekumi-glitch](https://github.com/daviekumi-glitch)  
-Repository: [ai-agent-ide](https://github.com/daviekumi-glitch/ai-agent-ide)
-
-## 🆘 Support
-
-For issues and questions, please open an issue on GitHub.
+- GitHub: [@daviekumi-glitch](https://github.com/daviekumi-glitch)
+- Repository: [ai-agent-ide](https://github.com/daviekumi-glitch/ai-agent-ide)
 
 ---
 
-**Built with ❤️ using Next.js, React, TypeScript, and Capacitor**
+## 🌟 Support
+
+If you find this project helpful, please give it a ⭐ on GitHub!
+
+**Latest Version**: 2.2.0  
+**Last Updated**: January 2025
