@@ -1,40 +1,33 @@
 {
   "name": "ai-agent-ide",
-  "version": "1.0.0",
-  "description": "AI Agent IDE - Next.js Android Mobile App for Code Generation & Automation",
-  "author": "Davie Kuminga",
+  "version": "2.0.0",
+  "description": "AI-powered IDE for building mobile and web apps",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "android": "cap sync android && cap open android",
-    "build:android": "next build && cap sync android && cd android && ./gradlew assembleDebug"
+    "ios": "cap sync ios && cap open ios"
   },
   "dependencies": {
-    "next": "^14.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@capacitor/core": "^5.5.0",
-    "@capacitor/android": "^5.5.0",
-    "@capacitor/app": "^5.0.6",
-    "@capacitor/clipboard": "^5.0.6",
-    "@capacitor/filesystem": "^5.1.4",
-    "@monaco-editor/react": "^4.6.0",
-    "axios": "^1.6.0",
-    "framer-motion": "^10.16.4",
-    "lucide-react": "^0.292.0"
+    "next": "^14.2.0",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "@capacitor/core": "^5.7.0",
+    "@capacitor/android": "^5.7.0",
+    "@capacitor/ios": "^5.7.0",
+    "tailwindcss": "^3.4.0",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.0"
   },
   "devDependencies": {
-    "@capacitor/cli": "^5.5.0",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "autoprefixer": "^10.0.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.0.0",
-    "postcss": "^8",
-    "tailwindcss": "^3.3.0",
-    "typescript": "^5"
-  }
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "@capacitor/cli": "^5.7.0",
+    "typescript": "^5.3.0"
+  },
+  "author": "Davie Kuminga",
+  "license": "MIT"
 }

@@ -1,104 +1,163 @@
-# AI Agent IDE - Next.js Android App
+# 🚀 AI Agent IDE
 
-**AI-powered mobile IDE for building apps, writing code, and automation**
+Professional AI-powered IDE for building mobile apps, web apps, and automation scripts.
 
-Created by: **Davie Kuminga** | Davie Cyber Team
+**Developed by:** Davie Kuminga | Davie Cyber Team
 
----
+## ✨ Features
 
-## 🚀 Features
+- 🤖 **AI Code Generation** - Generate code using advanced AI models
+- 📱 **Mobile App Builder** - Create Android/iOS apps with React Native
+- 🌐 **Web App Builder** - Build modern web applications
+- ⚡ **Automation Scripts** - Automate tasks with AI-generated scripts
+- 🌍 **Multi-Language Support** - English, Chichewa, Spanish, French, Portuguese
+- 🎨 **Theme Support** - Light and dark themes
+- 📁 **Project Management** - Create, edit, and organize projects
+- 📋 **Templates Library** - Quick-start templates for common projects
+- ⚙️ **Settings** - Customize AI model, API keys, and preferences
 
-- ✨ **AI Code Generation** - Generate code using AI agents
-- 📱 **Mobile App Builder** - Create React Native & Flutter apps
-- 🌐 **Web Development** - Build Next.js & React websites
-- ⚡ **Code Execution** - Run Python, JavaScript, Java, Kotlin
-- 🤖 **Multiple AI Agents** - Specialized agents for different tasks
-- 📲 **Android App** - Full Android application using Capacitor
+## 🔧 Installation
 
----
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
+- Android Studio (for Android builds)
+- Xcode (for iOS builds, Mac only)
 
-## 📦 Installation
-
-### For Android (APK)
+### Setup
 
 ```bash
+# Clone the repository
+git clone https://github.com/daviekumi-glitch/ai-agent-ide.git
+cd ai-agent-ide
+
 # Install dependencies
 npm install
 
-# Build the Next.js app
-npm run build
-
-# Add Android platform
-npx cap add android
-
-# Sync and build
-npx cap sync android
-npx cap open android
-```
-
-Then build the APK in Android Studio.
-
-### For Development
-
-```bash
-# Install dependencies
-npm install
-
-# Run development server
+# Start development server
 npm run dev
-
-# Open in browser
-# http://localhost:3000
 ```
 
----
+Open [http://localhost:3000](http://localhost:3000) to see the app.
 
-## 🛠️ Tech Stack
-
-- **Framework**: Next.js 14 (App Router)
-- **UI**: React + TailwindCSS
-- **Mobile**: Capacitor (Android)
-- **Language**: TypeScript
-- **AI Agents**: Custom agent system
-
----
-
-## 📱 Build Android APK
+## 📱 Build for Android
 
 ```bash
-# Build Next.js static export
+# Install Capacitor CLI globally
+npm install -g @capacitor/cli
+
+# Build the web app
 npm run build
 
-# Sync with Capacitor
-npx cap sync
+# Sync with Android
+npx cap sync android
 
-# Open Android Studio
+# Open in Android Studio
 npx cap open android
-
-# Build APK in Android Studio:
-# Build > Build Bundle(s) / APK(s) > Build APK(s)
 ```
 
----
+## 🌍 Supported Languages
 
-## 🎯 Usage
+- 🇬🇧 English
+- 🇲🇼 Chichewa (Chinyanja)
+- 🇪🇸 Spanish
+- 🇫🇷 French
+- 🇵🇹 Portuguese
 
-1. **Select AI Agent** - Choose from Code, Mobile, Web, or Automation agents
-2. **Choose Framework** - Pick React Native, Flutter, Next.js, etc.
-3. **Write or Generate** - Write code manually or use AI to generate
-4. **Execute** - Run code and see real-time output
-5. **Build** - Export as mobile app or website
+## 🎨 Theme System
 
----
+The app supports:
+- 🌙 Dark Mode (default)
+- ☀️ Light Mode
+
+Theme preference is saved locally and persists across sessions.
+
+## 📖 Usage
+
+### Creating a New Project
+
+1. Navigate to **Projects** page
+2. Click **Create New Project**
+3. Enter project name, type, and description
+4. Click **Save**
+
+### Using Templates
+
+1. Go to **Templates** page
+2. Browse available templates
+3. Click **Use Template** on your chosen template
+4. Template code will be loaded in the IDE
+
+### Generating Code with AI
+
+1. Select an AI agent (Code, Mobile, Web, or Automation)
+2. Enter your prompt describing what you want to build
+3. Click **Generate**
+4. AI will generate the code for you
+5. Click **Run** to execute the code
+
+### Settings Configuration
+
+1. Go to **Settings**
+2. Configure:
+   - Theme (Light/Dark)
+   - Language
+   - AI API Key
+   - AI Model selection
+   - Auto-save preferences
+
+## 🔑 API Configuration
+
+To use AI features, you need an API key:
+
+1. Get an API key from OpenAI, Anthropic, or Google AI
+2. Go to Settings
+3. Enter your API key
+4. Select your preferred model
+5. Save settings
+
+## 📂 Project Structure
+
+```
+ai-agent-ide/
+├── app/                    # Next.js app directory
+│   ├── page.tsx           # Main IDE interface
+│   ├── projects/          # Projects management
+│   ├── templates/         # Templates library
+│   ├── settings/          # Settings page
+│   └── api/               # API routes
+├── components/            # React components
+│   ├── Navigation.tsx     # Navigation bar
+│   ├── Header.tsx         # App header
+│   ├── CodeEditor.tsx     # Code editor
+│   ├── OutputPanel.tsx    # Output display
+│   └── ActionBar.tsx      # Action buttons
+├── lib/                   # Utilities
+│   ├── i18n.ts           # Translations
+│   └── theme-context.tsx  # Theme provider
+└── public/               # Static assets
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📄 License
 
-MIT License - Created by Davie Kuminga
+MIT License - see LICENSE file for details
+
+## 👨‍💻 Developer
+
+**Davie Kuminga**  
+Davie Cyber Team
+
+GitHub: [@daviekumi-glitch](https://github.com/daviekumi-glitch)  
+Repository: [ai-agent-ide](https://github.com/daviekumi-glitch/ai-agent-ide)
+
+## 🆘 Support
+
+For issues and questions, please open an issue on GitHub.
 
 ---
 
-## 🔗 Links
-
-- **Repository**: https://github.com/daviekumi-glitch/ai-agent-ide
-- **Author**: Davie Kuminga
-- **Organization**: Davie Cyber Team
+**Built with ❤️ using Next.js, React, TypeScript, and Capacitor**
