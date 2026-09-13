@@ -8,9 +8,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "android": "cap sync android && cap open android",
+    "android": "cap sync android && cd android && ./gradlew assembleDebug",
     "ios": "cap sync ios && cap open ios",
-    "build:apk": "next build && next export && cap sync android && cd android && ./gradlew assembleRelease"
+    "build:apk": "next build && next export && cap sync android && cd android && ./gradlew assembleRelease",
+    "export": "next export"
   },
   "dependencies": {
     "next": "^14.0.0",
