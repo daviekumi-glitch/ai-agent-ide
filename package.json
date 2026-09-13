@@ -1,33 +1,35 @@
 {
   "name": "ai-agent-ide",
-  "version": "2.0.0",
-  "description": "AI-powered IDE for building mobile and web apps",
+  "version": "3.0.0",
+  "description": "AI-powered mobile IDE for building apps with intelligent agents",
+  "author": "Davie Kuminga",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "android": "cap sync android && cap open android",
-    "ios": "cap sync ios && cap open ios"
+    "ios": "cap sync ios && cap open ios",
+    "build:apk": "next build && next export && cap sync android && cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
-    "next": "^14.2.0",
-    "react": "^18.3.0",
-    "react-dom": "^18.3.0",
-    "@capacitor/core": "^5.7.0",
-    "@capacitor/android": "^5.7.0",
-    "@capacitor/ios": "^5.7.0",
-    "tailwindcss": "^3.4.0",
-    "autoprefixer": "^10.4.0",
-    "postcss": "^8.4.0"
+    "next": "^14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@capacitor/core": "^5.5.0",
+    "@capacitor/android": "^5.5.0",
+    "@capacitor/cli": "^5.5.0",
+    "vm2": "^3.9.19",
+    "monaco-editor": "^0.44.0",
+    "@monaco-editor/react": "^4.6.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
-    "@types/react": "^18.3.0",
-    "@types/react-dom": "^18.3.0",
-    "@capacitor/cli": "^5.7.0",
-    "typescript": "^5.3.0"
-  },
-  "author": "Davie Kuminga",
-  "license": "MIT"
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5",
+    "typescript": "^5.2.2"
+  }
 }
