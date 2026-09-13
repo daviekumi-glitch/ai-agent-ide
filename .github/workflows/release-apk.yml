@@ -55,7 +55,11 @@ jobs:
         run: |
           APK="android/app/build/outputs/apk/release/app-release.apk"
           test -f "$APK"
-          $ANDROID_HOME/build-tools/34.0.0/apksigner verify --print-certs "$APK" | head -5
+          SDK="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          APKSIGNER=$(find "$SDK/build-tools" -name apksigner 2>/dev/null | sort -V | tail -1)
+          echo "Using apksigner: $APKSIGNER"
+          test -n "$APKSIGNER"
+          "$APKSIGNER" verify --print-certs "$APK" | head -5
 
       - name: Rename APK
         run: |
