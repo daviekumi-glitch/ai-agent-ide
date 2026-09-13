@@ -71,7 +71,7 @@ export class PluginManager {
       const hook = plugin.hooks[hookName]
       if (hook) {
         try {
-          const result = await hook(...args)
+          const result = await (hook as (...hookArgs: unknown[]) => unknown)(...args)
           results.push(result)
         } catch (error) {
           console.error(`Error executing hook ${hookName} in plugin ${plugin.id}:`, error)

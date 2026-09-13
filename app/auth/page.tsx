@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { ClientAuth } from '@/lib/client-auth';
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
@@ -18,16 +19,9 @@ export default function AuthPage() {
     setError('');
 
     try {
-      const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
-      const body = isLogin ? { email, password } : { email, password, name };
-
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      });
-
-      const data = await response.json();
+      const data = isLogin
+        ? await ClientAuth.login(email, password)
+        : await ClientAuth.register(email, password, name);
 
       if (data.success) {
         router.push('/ide');
@@ -125,7 +119,7 @@ export default function AuthPage() {
 
         <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
           <p className="text-xs text-center text-gray-500 dark:text-gray-400">
-            Created by Davie Kuminga | Secure Base64 Authentication
+            Created by Davie Kuminga | On-device PBKDF2 authentication
           </p>
         </div>
       </div>

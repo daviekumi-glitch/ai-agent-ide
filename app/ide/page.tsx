@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useState } from 'react';
-import Header from '../components/Header';
-import FileExplorer from '../components/FileExplorer';
-import CodeEditor from '../components/CodeEditor';
-import PreviewPanel from '../components/PreviewPanel';
-import AIAssistant from '../components/AIAssistant';
+import Header from '@/components/Header';
+import FileExplorer from '@/components/FileExplorer';
+import CodeEditor from '@/components/CodeEditor';
+import PreviewPanel from '@/components/PreviewPanel';
+import AIAssistant from '@/components/AIAssistant';
 import { Play, Code, Eye, Split } from 'lucide-react';
 
 interface FileNode {

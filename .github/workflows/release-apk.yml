@@ -1,0 +1,92 @@
+name: Release Android APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-release-apk:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Next.js app (static export)
+        run: npx next build
+
+      - name: Sync web assets into Android project
+        run: npx cap sync android
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Decode signing keystore
+        run: |
+          echo "${{ secrets.RELEASE_KEYSTORE_BASE64 }}" | base64 -d > "$GITHUB_WORKSPACE/android/release.keystore"
+          ls -la "$GITHUB_WORKSPACE/android/release.keystore"
+
+      - name: Build signed release APK
+        working-directory: android
+        env:
+          RELEASE_KEYSTORE_FILE: ${{ github.workspace }}/android/release.keystore
+          RELEASE_KEYSTORE_PASSWORD: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
+          RELEASE_KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
+          RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleRelease --stacktrace
+
+      - name: Verify APK is signed
+        run: |
+          APK="android/app/build/outputs/apk/release/app-release.apk"
+          test -f "$APK"
+          $ANDROID_HOME/build-tools/34.0.0/apksigner verify --print-certs "$APK" | head -5
+
+      - name: Rename APK
+        run: |
+          cp android/app/build/outputs/apk/release/app-release.apk \
+             "AI-Agent-IDE-v4.1.0-release.apk"
+          ls -la *.apk
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-agent-ide-release-apk
+          path: AI-Agent-IDE-v4.1.0-release.apk
+          if-no-files-found: error
+
+      - name: Create GitHub Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "AI-Agent-IDE-v4.1.0-release.apk"
+          tag: v4.1.0
+          name: "AI Agent IDE v4.1.0 — Android Release"
+          body: |
+            Signed release APK for AI Agent IDE.
+
+            Fully offline-capable build:
+            - On-device authentication (PBKDF2-hashed accounts stored locally)
+            - On-device JavaScript execution engine
+            - Template-based code generation (React, React Native, Node.js, Flutter)
+            - Projects stored locally on the device
+
+            Install: download the APK below, enable "install from unknown sources" if prompted, and open it.
+          draft: false
+          prerelease: false
+          allowUpdates: true
+          token: ${{ secrets.GITHUB_TOKEN }}

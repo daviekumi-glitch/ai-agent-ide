@@ -69,7 +69,7 @@ export default function AIAssistant() {
     }
     
     if (lowerQuery.includes('error') || lowerQuery.includes('bug')) {
-      return 'I can help you debug! Please share:\n\n1. The error message you're seeing\n2. The code that's causing the issue\n3. What you expected to happen\n\nThis will help me provide better assistance.';
+      return `I can help you debug! Please share:\n\n1. The error message you are seeing\n2. The code that is causing the issue\n3. What you expected to happen\n\nThis will help me provide better assistance.`;
     }
     
     if (lowerQuery.includes('mobile') || lowerQuery.includes('app')) {

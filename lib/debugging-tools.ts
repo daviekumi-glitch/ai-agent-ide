@@ -98,7 +98,7 @@ export class TestRunner {
 
     try {
       // Parse test cases from code
-      const testMatches = code.matchAll(/(?:test|it)\s*\(['"](.+?)['"]/g);
+      const testMatches = Array.from(code.matchAll(/(?:test|it)\s*\(['"](.+?)['"]/g));
       
       for (const match of testMatches) {
         const testName = match[1];
@@ -213,6 +213,6 @@ export class PerformanceProfiler {
   }
 }
 
-export const debugger = new DebuggerTool();
+export const debugTool = new DebuggerTool();
 export const testRunner = new TestRunner();
 export const profiler = new PerformanceProfiler();

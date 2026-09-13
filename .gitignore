@@ -9,8 +9,12 @@ out/
 build/
 dist/
 
-# Capacitor
-android/
+# Capacitor — the android/ platform is COMMITTED (CI builds the APK from it).
+# Only ignore volatile build outputs inside it.
+android/.gradle/
+android/app/build/
+android/build/
+android/local.properties
 ios/
 .capacitor/
 

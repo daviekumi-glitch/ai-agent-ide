@@ -6,6 +6,7 @@ import AgentSelector from '../components/AgentSelector';
 import CodeEditor from '../components/CodeEditor';
 import OutputPanel from '../components/OutputPanel';
 import ActionBar from '../components/ActionBar';
+import { executeCode, generateCode } from '@/lib/client-engine';
 
 export default function Home() {
   const [selectedAgent, setSelectedAgent] = useState('code');
@@ -18,25 +19,9 @@ export default function Home() {
     setIsRunning(true);
     setOutput('');
 
-    try {
-      const response = await fetch('/api/execute', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code, language, agent: selectedAgent }),
-      });
-
-      const data = await response.json();
-      
-      if (data.success) {
-        setOutput(data.output);
-      } else {
-        setOutput(`Error: ${data.error}`);
-      }
-    } catch (error: any) {
-      setOutput(`Execution failed: ${error.message}`);
-    } finally {
-      setIsRunning(false);
-    }
+    // Real on-device execution (offline-capable build)
+    setOutput(executeCode(code, language));
+    setIsRunning(false);
   };
 
   const handleClear = () => {
@@ -55,18 +40,10 @@ export default function Home() {
   };
 
   const handleGenerate = async (prompt: string) => {
+    // Template-based on-device generation
     setIsRunning(true);
     try {
-      const response = await fetch('/api/generate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt, agent: selectedAgent, framework: 'react-native' }),
-      });
-
-      const data = await response.json();
-      if (data.success) {
-        setCode(data.code);
-      }
+      setCode(generateCode(prompt, 'react-native'));
     } catch (error) {
       console.error('Generation failed:', error);
     } finally {
@@ -80,8 +57,8 @@ export default function Home() {
       
       <div className="container mx-auto p-4 space-y-4">
         <AgentSelector
-          selectedAgent={selectedAgent}
-          onSelectAgent={setSelectedAgent}
+          selected={selectedAgent}
+          onSelect={setSelectedAgent}
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-[500px]">

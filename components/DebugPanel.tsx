@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { debugger as debugTool, testRunner, profiler, TestResult, PerformanceMetrics } from '@/lib/debugging-tools';
+import { debugTool, testRunner, profiler, TestResult, PerformanceMetrics } from '@/lib/debugging-tools';
 
 interface DebugPanelProps {
   code: string;

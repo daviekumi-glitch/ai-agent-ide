@@ -1,4 +1,12 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: '#3b82f6',
+};
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/lib/theme-context';
@@ -11,8 +19,6 @@ export const metadata: Metadata = {
   title: 'AI Agent IDE | Build with AI',
   description: 'Build mobile apps, websites, and automate workflows with AI agents',
   manifest: '/manifest.json',
-  themeColor: '#3b82f6',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',

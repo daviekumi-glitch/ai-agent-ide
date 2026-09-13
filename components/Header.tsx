@@ -1,10 +1,11 @@
 'use client'
 
-import { Code2, Menu, Settings, Github } from 'lucide-react'
+import { Code2, Menu, Settings, Github, Wand2 } from 'lucide-react'
 import { useState } from 'react'
 
-export default function Header() {
+export default function Header({ onGenerate }: { onGenerate?: (prompt: string) => void }) {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [prompt, setPrompt] = useState('')
 
   return (
     <header className="glass border-b border-white/10">
@@ -32,6 +33,23 @@ export default function Header() {
           >
             <Github className="w-5 h-5" />
           </a>
+          {onGenerate && (
+            <div className="hidden md:flex items-center gap-2">
+              <input
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                placeholder="Describe what to build..."
+                className="glass px-3 py-1.5 rounded-lg text-sm w-56 outline-none"
+              />
+              <button
+                onClick={() => { if (prompt.trim()) { onGenerate(prompt.trim()); setPrompt(''); } }}
+                className="p-2 glass rounded-lg hover:bg-white/10 transition-colors"
+                aria-label="Generate code"
+              >
+                <Wand2 className="w-5 h-5" />
+              </button>
+            </div>
+          )}
           <button className="p-2 glass rounded-lg hover:bg-white/10 transition-colors">
             <Settings className="w-5 h-5" />
           </button>
