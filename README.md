@@ -48,131 +48,22 @@ npm run build
 npm run build:android
 ```
 
-## 🏗️ Building Android APK
+## 🏗️ Android APK (automated)
 
-```bash
-# Install Capacitor
-npm install @capacitor/core @capacitor/android
+Every push to `main` triggers GitHub Actions to:
+1. Build the Next.js app as a static export (`out/`)
+2. Sync it into the committed `android/` Capacitor project
+3. Build a **signed release APK** (keystore stored as GitHub Actions secrets)
+4. Verify the signature with `apksigner`
+5. Publish it to the GitHub Releases page
 
-# Initialize Capacitor
-npx cap init
+Download the latest APK from the Releases page — no Android Studio needed.
 
-# Build Next.js app
-npm run build
+Local development: `npm run dev` · Build web: `npm run build` · Sync Android: `npm run build:android`
 
-# Sync with Android
-npx cap sync android
+## 🔒 Honest scope
 
-# Open in Android Studio
-npx cap open android
-
-# Build APK in Android Studio
-```
-
-## 🛠️ Development
-
-### Project Structure
-```
-ai-agent-ide/
-├── app/              # Next.js app router pages
-├── components/       # React components
-├── lib/             # Utilities and libraries
-├── public/          # Static assets
-├── android/         # Android native project
-└── capacitor.config.ts
-```
-
-### Key Features
-
-#### AI Code Generation
-```typescript
-import { generateCode } from '@/lib/ai-agent';
-
-const code = await generateCode({
-  type: 'mobile-app',
-  description: 'Todo app with Firebase',
-  language: 'typescript'
-});
-```
-
-#### Real-time Collaboration
-```typescript
-import { CollaborationManager } from '@/lib/collaboration';
-
-const collab = new CollaborationManager(userId);
-await collab.connect(projectId);
-collab.onEdit((edit) => {
-  // Handle collaborative edits
-});
-```
-
-#### Debugging Tools
-```typescript
-import { debugger, testRunner, profiler } from '@/lib/debugging-tools';
-
-// Add breakpoint
-debugger.addBreakpoint(10);
-
-// Run tests
-const results = await testRunner.runTests(code, 'javascript');
-
-// Profile performance
-const metrics = await profiler.profile(code);
-```
-
-## 🌐 API Endpoints
-
-- `POST /api/auth/register` - User registration
-- `POST /api/auth/login` - User login
-- `POST /api/generate` - Generate code with AI
-- `POST /api/execute` - Execute code safely
-- `GET /api/projects` - List user projects
-- `POST /api/projects` - Create new project
-
-## 🔧 Configuration
-
-### Environment Variables
-```env
-NEXT_PUBLIC_API_URL=http://localhost:3000
-DATABASE_URL=your_database_url
-JWT_SECRET=your_jwt_secret
-```
-
-### Theme Customization
-Edit `tailwind.config.js` to customize colors and styles.
-
-## 📱 Mobile Features
-
-- Native Android/iOS support via Capacitor
-- Offline-first with service workers
-- Push notifications
-- Camera and file access
-- Biometric authentication support
-
-## 🤝 Contributing
-
-Contributions are welcome! Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
-
-## 📄 License
-
-MIT License - see [LICENSE](./LICENSE) file
-
-## 👨‍💻 Author
-
-**Davie Kuminga**  
-Davie Cyber Team  
-
-## 🔗 Links
-
-- Repository: https://github.com/daviekumi-glitch/ai-agent-ide
-- Issues: https://github.com/daviekumi-glitch/ai-agent-ide/issues
-
-## 📱 APK Download
-
-Latest release APK available in [Releases](https://github.com/daviekumi-glitch/ai-agent-ide/releases)
+This build runs fully offline on-device: authentication is PBKDF2-hashed local accounts, JavaScript executes on-device with console capture, code generation is template-based (React / React Native / Node.js / Flutter), and Python/Java/Kotlin get honest on-device analysis instead of pretending to execute. No server, no fake AI.
 
 ---
-
-**Version:** 3.2.0  
-**Last Updated:** 2026-09-13  
-Built with ❤️ by Davie Cyber Team
+Created by Davie Kuminga
