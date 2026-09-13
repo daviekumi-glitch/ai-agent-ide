@@ -1,14 +1,27 @@
-import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import './globals.css';
 import { ThemeProvider } from '@/lib/theme-context';
-import Navigation from '@/components/Navigation';
+import { ToastProvider } from '@/lib/toast-context';
+import OnboardingTutorial from '@/components/OnboardingTutorial';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'AI Agent IDE - Build Apps with AI',
-  description: 'Professional AI-powered IDE for mobile, web, and automation development',
+  title: 'AI Agent IDE | Build with AI',
+  description: 'Build mobile apps, websites, and automate workflows with AI agents',
+  manifest: '/manifest.json',
+  themeColor: '#3b82f6',
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'AI IDE'
+  },
+  icons: {
+    icon: '/icon-192.png',
+    apple: '/icon-512.png'
+  }
 };
 
 export default function RootLayout({
@@ -17,12 +30,31 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
+      <head>
+        <link rel="icon" href="/icon-192.png" />
+        <link rel="apple-touch-icon" href="/icon-512.png" />
+        <meta name="mobile-web-app-capable" content="yes" />
+      </head>
       <body className={inter.className}>
         <ThemeProvider>
-          <Navigation />
-          {children}
+          <ToastProvider>
+            <OnboardingTutorial />
+            {children}
+          </ToastProvider>
         </ThemeProvider>
+        
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            if ('serviceWorker' in navigator) {
+              window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                  .then(reg => console.log('Service Worker registered'))
+                  .catch(err => console.log('SW registration failed:', err));
+              });
+            }
+          `
+        }} />
       </body>
     </html>
   );
