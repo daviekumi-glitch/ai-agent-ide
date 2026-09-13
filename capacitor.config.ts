@@ -4,24 +4,14 @@ const config: CapacitorConfig = {
   appId: 'com.daviekuminga.aiagentide',
   appName: 'AI Agent IDE',
   webDir: 'out',
+  bundledWebRuntime: false,
   server: {
-    androidScheme: 'https',
-    iosScheme: 'https'
+    androidScheme: 'https'
   },
   android: {
     buildOptions: {
       keystorePath: undefined,
       keystoreAlias: undefined,
-      releaseType: 'APK'
-    }
-  },
-  plugins: {
-    SplashScreen: {
-      launchShowDuration: 2000,
-      backgroundColor: '#6366f1',
-      androidScaleType: 'CENTER_CROP',
-      showSpinner: true,
-      spinnerColor: '#ffffff'
     }
   }
 };
