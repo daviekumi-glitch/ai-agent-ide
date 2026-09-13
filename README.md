@@ -1,43 +1,34 @@
-# 🤖 AI Agent IDE
+# AI Agent IDE v3.2.0
 
-**Professional AI-Powered Development Environment**  
-Build mobile apps, websites, and automation workflows with intelligent AI agents.
+> Professional AI-powered development environment for building mobile apps, websites, and automating workflows
 
-![Version](https://img.shields.io/badge/version-2.2.0-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-![Next.js](https://img.shields.io/badge/Next.js-14-black)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+[![Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
 
----
+## 🚀 Features
 
-## ✨ Features
-
-### 🎯 Core Capabilities
-- **AI-Powered Code Generation** - Generate code using advanced AI agents
-- **Multi-Language Support** - English, Chichewa, and more
-- **Real-Time Preview** - Instant preview of your applications
-- **Version Control** - Built-in Git integration
-- **One-Click Deployment** - Deploy to Vercel, Netlify, or build Android APKs
-
-### 🚀 Advanced Features
-- **Plugin System** - Extend functionality with custom plugins
-- **File Explorer** - Complete project file management
-- **AI Assistant** - Chat with AI for coding help
-- **Code Editor** - Syntax highlighting and intelligent autocomplete
-- **Mobile-Optimized** - Responsive design for Android devices
-- **Theme Support** - Light/Dark mode with customizable themes
-- **Offline Mode** - Work without internet connection
-
-### 🤖 AI Agents
-- **Code Agent** - Generate any code (Python, JavaScript, Java, etc.)
-- **Mobile Agent** - Build Android and iOS apps
-- **Web Agent** - Create websites and web apps
-- **Automation Agent** - Build workflow automations
-
----
+### Core Capabilities
+- ✨ **AI Code Generation** - Generate complete applications using AI agents
+- 📱 **Mobile App Builder** - Create Android/iOS apps with React Native
+- 🌐 **Web Development** - Build modern web applications
+- 🤖 **Automation Engine** - Automate workflows and tasks
+- 🔄 **Real-time Collaboration** - Code together with team members
+- 🐛 **Integrated Debugger** - Debug with breakpoints and variable inspection
+- ✅ **Test Runner** - Run and manage unit tests
+- ⚡ **Performance Profiler** - Analyze code performance
+- 💡 **IntelliSense** - Smart code completion and suggestions
+- 🌍 **Multi-language** - Support for English, Spanish, French, and Chichewa
+- 🎨 **Theme System** - Light/dark mode with custom themes
+- 📱 **PWA Support** - Install as native app, works offline
 
 ## 📦 Installation
 
-### For Development
+### Prerequisites
+- Node.js 18+ and npm/yarn
+- Android Studio (for APK building)
+
+### Quick Start
 
 ```bash
 # Clone repository
@@ -46,135 +37,142 @@ cd ai-agent-ide
 
 # Install dependencies
 npm install
-# or
-yarn install
 
 # Run development server
 npm run dev
-# or
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-### For Android APK
-
-```bash
-# Install Capacitor
-npm install @capacitor/core @capacitor/cli
-
-# Add Android platform
-npx cap add android
 
 # Build for production
 npm run build
-npx cap sync
+
+# Build Android APK
+npm run build:android
+```
+
+## 🏗️ Building Android APK
+
+```bash
+# Install Capacitor
+npm install @capacitor/core @capacitor/android
+
+# Initialize Capacitor
+npx cap init
+
+# Build Next.js app
+npm run build
+
+# Sync with Android
+npx cap sync android
 
 # Open in Android Studio
 npx cap open android
+
+# Build APK in Android Studio
 ```
 
----
+## 🛠️ Development
 
-## 🎨 Usage
+### Project Structure
+```
+ai-agent-ide/
+├── app/              # Next.js app router pages
+├── components/       # React components
+├── lib/             # Utilities and libraries
+├── public/          # Static assets
+├── android/         # Android native project
+└── capacitor.config.ts
+```
 
-### 1. **Select Agent Type**
-Choose from Code, Mobile, Web, or Automation agents
+### Key Features
 
-### 2. **Describe What You Want**
-Type your requirements in natural language
-
-### 3. **Generate Code**
-AI generates production-ready code instantly
-
-### 4. **Preview & Test**
-See live preview of your application
-
-### 5. **Deploy**
-One-click deployment to your preferred platform
-
----
-
-## 🔌 Plugin Development
-
-Create custom plugins to extend IDE functionality:
-
+#### AI Code Generation
 ```typescript
-import { Plugin } from '@/lib/plugin-system'
+import { generateCode } from '@/lib/ai-agent';
 
-const myPlugin: Plugin = {
-  id: 'my-plugin',
-  name: 'My Custom Plugin',
-  version: '1.0.0',
-  description: 'Does amazing things',
-  author: 'Your Name',
-  enabled: true,
-  hooks: {
-    onCodeGenerate: async (code) => {
-      // Modify generated code
-      return code
-    }
-  }
-}
+const code = await generateCode({
+  type: 'mobile-app',
+  description: 'Todo app with Firebase',
+  language: 'typescript'
+});
 ```
 
----
+#### Real-time Collaboration
+```typescript
+import { CollaborationManager } from '@/lib/collaboration';
 
-## 🌐 Supported Platforms
+const collab = new CollaborationManager(userId);
+await collab.connect(projectId);
+collab.onEdit((edit) => {
+  // Handle collaborative edits
+});
+```
 
-- ✅ **Web** - Any modern browser
-- ✅ **Android** - Android 7.0+
-- ✅ **iOS** - iOS 13+ (coming soon)
-- ✅ **Desktop** - Electron app (coming soon)
+#### Debugging Tools
+```typescript
+import { debugger, testRunner, profiler } from '@/lib/debugging-tools';
 
----
+// Add breakpoint
+debugger.addBreakpoint(10);
 
-## 🛠️ Tech Stack
+// Run tests
+const results = await testRunner.runTests(code, 'javascript');
 
-- **Framework**: Next.js 14
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Mobile**: Capacitor
-- **AI**: Multiple AI agent systems
-- **Version Control**: Git integration
-- **Deployment**: Vercel/Netlify ready
+// Profile performance
+const metrics = await profiler.profile(code);
+```
 
----
+## 🌐 API Endpoints
 
-## 📚 Documentation
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/login` - User login
+- `POST /api/generate` - Generate code with AI
+- `POST /api/execute` - Execute code safely
+- `GET /api/projects` - List user projects
+- `POST /api/projects` - Create new project
 
-- [User Guide](./docs/user-guide.md)
-- [API Reference](./docs/api.md)
-- [Plugin Development](./docs/plugins.md)
-- [Contributing](./CONTRIBUTING.md)
+## 🔧 Configuration
 
----
+### Environment Variables
+```env
+NEXT_PUBLIC_API_URL=http://localhost:3000
+DATABASE_URL=your_database_url
+JWT_SECRET=your_jwt_secret
+```
+
+### Theme Customization
+Edit `tailwind.config.js` to customize colors and styles.
+
+## 📱 Mobile Features
+
+- Native Android/iOS support via Capacitor
+- Offline-first with service workers
+- Push notifications
+- Camera and file access
+- Biometric authentication support
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please read our [Contributing Guidelines](./CONTRIBUTING.md) first.
+Contributions are welcome! Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
 
----
+## 📄 License
 
-## 📝 License
-
-MIT License - see [LICENSE](./LICENSE) file for details
-
----
+MIT License - see [LICENSE](./LICENSE) file
 
 ## 👨‍💻 Author
 
 **Davie Kuminga**  
-Davie Cyber Team
+Davie Cyber Team  
 
-- GitHub: [@daviekumi-glitch](https://github.com/daviekumi-glitch)
-- Repository: [ai-agent-ide](https://github.com/daviekumi-glitch/ai-agent-ide)
+## 🔗 Links
+
+- Repository: https://github.com/daviekumi-glitch/ai-agent-ide
+- Issues: https://github.com/daviekumi-glitch/ai-agent-ide/issues
+
+## 📱 APK Download
+
+Latest release APK available in [Releases](https://github.com/daviekumi-glitch/ai-agent-ide/releases)
 
 ---
 
-## 🌟 Support
-
-If you find this project helpful, please give it a ⭐ on GitHub!
-
-**Latest Version**: 2.2.0  
-**Last Updated**: January 2025
+**Version:** 3.2.0  
+**Last Updated:** 2026-09-13  
+Built with ❤️ by Davie Cyber Team
