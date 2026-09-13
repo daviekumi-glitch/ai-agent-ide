@@ -16,10 +16,35 @@ android {
             ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+    def envKeystoreFile = System.getenv("RELEASE_KEYSTORE_FILE")
+    def envKeystorePassword = System.getenv("RELEASE_KEYSTORE_PASSWORD")
+    def envKeyAlias = System.getenv("RELEASE_KEY_ALIAS")
+    def envKeyPassword = System.getenv("RELEASE_KEY_PASSWORD")
+
+    signingConfigs {
+        if (envKeystoreFile != null) {
+            release {
+                storeFile file(envKeystoreFile)
+                storePassword envKeystorePassword
+                keyAlias envKeyAlias
+                keyPassword envKeyPassword
+                storeType "PKCS12"
+                v1SigningEnabled true
+                v2SigningEnabled true
+            }
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            if (envKeystoreFile != null) {
+                signingConfig signingConfigs.release
+            } else {
+                // Local builds without CI secrets: sign with debug so the APK is still installable.
+                signingConfig signingConfigs.debug
+            }
         }
     }
 }

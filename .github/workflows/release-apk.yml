@@ -53,18 +53,21 @@ jobs:
 
       - name: Verify APK is signed
         run: |
-          APK="android/app/build/outputs/apk/release/app-release.apk"
-          test -f "$APK"
+          echo "APK outputs:"
+          ls -la android/app/build/outputs/apk/release/ || true
+          APK=$(find android/app/build/outputs -name "app-release.apk" | head -1)
+          test -n "$APK"
+          echo "Verifying: $APK"
           SDK="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
           APKSIGNER=$(find "$SDK/build-tools" -name apksigner 2>/dev/null | sort -V | tail -1)
           echo "Using apksigner: $APKSIGNER"
           test -n "$APKSIGNER"
           "$APKSIGNER" verify --print-certs "$APK" | head -5
+          echo "$APK" > /tmp/apk_path
 
       - name: Rename APK
         run: |
-          cp android/app/build/outputs/apk/release/app-release.apk \
-             "AI-Agent-IDE-v4.1.0-release.apk"
+          cp "$(cat /tmp/apk_path)" "AI-Agent-IDE-v4.1.0-release.apk"
           ls -la *.apk
 
       - name: Upload APK artifact
