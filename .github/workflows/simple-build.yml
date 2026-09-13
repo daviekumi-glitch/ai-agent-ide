@@ -1,0 +1,75 @@
+name: Simple APK Build
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+      
+      - name: Build Next.js app
+        run: npm run build
+      
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      
+      - name: Install Capacitor CLI
+        run: npm install -g @capacitor/cli
+      
+      - name: Initialize Capacitor Android
+        run: |
+          npx cap add android || echo "Android platform already exists"
+          npx cap sync android
+      
+      - name: Build Android Debug APK
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug --stacktrace
+      
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+      
+      - name: Create Release
+        if: success()
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "android/app/build/outputs/apk/debug/app-debug.apk"
+          tag: v4.0.${{ github.run_number }}
+          name: "AI Agent IDE v4.0.${{ github.run_number }}"
+          body: |
+            🚀 **AI Agent IDE - Android Release**
+            
+            ✨ Features:
+            - AI-powered code generation
+            - Multi-language support (Python, JavaScript, etc.)
+            - Real-time preview
+            - Project management
+            - Beautiful UI with animations
+            
+            📱 **Download the APK below and install on your Android device**
+          draft: false
+          prerelease: false
+          token: ${{ secrets.GITHUB_TOKEN }}
